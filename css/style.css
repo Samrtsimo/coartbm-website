@@ -331,12 +331,27 @@ img { max-width: 100%; display: block; }
 .pm-video p { padding: 8px 10px; color: var(--muted); font-size: 0.8rem; background: var(--white); margin: 0; }
 .pm-videos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
 
-/* --- Production sections (grouped by product) --- */
-.production-list { display: flex; flex-direction: column; gap: 40px; }
+/* --- Production sections (grouped by product) — horizontal shelf --- */
+.production-list { display: flex; flex-direction: column; gap: 44px; }
 .production-block { border-top: 1px solid var(--line); padding-top: 28px; }
 .production-block h3 { margin-bottom: 16px; font-size: 1.15rem; }
-.production-block .pg-grid { margin: 0; }
-.production-block .pg-grid .pg-item figcaption { display: none; }
+.prod-shelf {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.prod-item {
+  margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--bg-alt);
+  cursor: zoom-in; position: relative;
+}
+.prod-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform 0.3s; }
+.prod-item:hover img { transform: scale(1.05); }
+.prod-item figcaption {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 8px;
+  background: rgba(20,23,26,0.62); color: white; font-size: 0.72rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.prod-video { border-radius: var(--radius); overflow: hidden; background: #000; }
+.prod-video video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
 
 @media (max-width: 720px) {
   .pm-window { width: 96vw; height: 94vh; }

@@ -25,47 +25,20 @@
   }
   function closeLightbox() { if (lb) { lb.style.display = 'none'; document.body.style.overflow = ''; } }
 
-  // ---- Product card carousel (auto-cycling best images) ----
-  function carouselHTML(best, name) {
-    var imgs = best.map(function (p) {
-      return '<img src="' + esc(p) + '" alt="' + name + '">';
-    }).join('');
-    return '<div class="pc-carousel">' + imgs + (best.length > 1 ? '<div class="pc-dots"></div>' : '') + '</div>';
-  }
-
-  // ---- Render product cards into #product-grid ----
+  // ---- Product card: single preview image (one per category) ----
   var grid = document.getElementById('product-grid');
   if (grid && PRODUCTS.length) {
     grid.innerHTML = PRODUCTS.map(function (p) {
+      var img = p.best[0] || (p.catalog[0] || '');
       return '<button class="product-card" data-product="' + p.id + '" aria-label="View ' + p.name + '">'
-        + '<div class="thumb">' + carouselHTML(p.best, p.name) + '</div>'
+        + '<div class="thumb"><img src="' + esc(img) + '" alt="' + p.name + '"></div>'
         + '<div class="body">'
         + '<div class="cat">' + p.cat + '</div>'
         + '<h3>' + p.name + '</h3>'
         + '<p>' + p.desc + '</p>'
-        + '<div class="foot"><span class="models">' + (p.count + p.factory.length ? (p.count + ' models') : '') + '</span><span class="arrow">View ›</span></div>'
+        + '<div class="foot"><span class="models">' + (p.count + ' models') + '</span><span class="arrow">View ›</span></div>'
         + '</div></button>';
     }).join('');
-
-    // Start carousels
-    Array.prototype.forEach.call(grid.querySelectorAll('.product-card'), function (card) {
-      var data = PRODUCTS.find(function (x) { return x.id === card.getAttribute('data-product'); });
-      if (!data) return;
-      var car = card.querySelector('.pc-carousel');
-      var imgs = car ? car.querySelectorAll('img') : [];
-      var dots = car ? car.querySelector('.pc-dots') : null;
-      if (!imgs.length) return;
-      var i = 0, timer;
-      function show(n) {
-        i = n % imgs.length;
-        Array.prototype.forEach.call(imgs, function (im, k) { im.classList.toggle('active', k === i); });
-        if (dots) Array.prototype.forEach.call(dots.children, function (d, k) { d.classList.toggle('active', k === i); });
-      }
-      if (dots) dots.innerHTML = imgs.length ? Array.prototype.map.call(imgs, function (_, k) { return '<span' + (k === 0 ? ' class="active"' : '') + '></span>'; }).join('') : '';
-      show(0);
-      if (imgs.length > 1) timer = setInterval(function () { show(i + 1); }, 2600);
-      card.addEventListener('focus', function () { clearInterval(timer); }, { once: true });
-    });
 
     // Click card -> open product modal
     Array.prototype.forEach.call(grid.querySelectorAll('.product-card'), function (card) {
@@ -140,45 +113,65 @@
     document.addEventListener('keydown', key);
   }
 
-  // ---- Production section: group by product, photos or video ----
+  // ---- Production section: group by product, photos or video (horizontal rows) ----
   var prodList = document.getElementById('production-list');
   if (prodList && PRODUCTS.length) {
-    // Only show products that have production photos OR videos
     var prods = PRODUCTS.filter(function (p) { return p.factory.length || p.videos.length; });
     prodList.innerHTML = prods.map(function (p) {
-      var gridHtml = '';
+      var inner = '';
       if (p.factory.length) {
-        gridHtml = imgGrid(p.factory.slice(0, 12), p.name);
-      } else if (p.videos.length) {
-        gridHtml = p.videos.slice(0, (p.videos.length > 5 ? 5 : p.videos.length)).map(function (v) {
-          return '<div class="pm-video"><video controls preload="metadata" src="' + esc(v) + '"></video></div>';
+        inner = p.factory.slice(0, 12).map(function (f) {
+          return '<figure class="prod-item" data-full="' + esc(f) + '"><img loading="lazy" src="' + esc(f) + '" alt="' + p.name + '"><figcaption>' + fa(f) + '</figcaption></figure>';
         }).join('');
-        gridHtml = '<div class="pg-grid">' + gridHtml + '</div>';
+        inner = '<div class="prod-shelf">' + inner + '</div>';
+      } else if (p.videos.length) {
+        inner = p.videos.slice(0, 6).map(function (v) {
+          return '<div class="prod-video"><video controls preload="metadata" src="' + esc(v) + '"></video></div>';
+        }).join('');
+        inner = '<div class="prod-shelf">' + inner + '</div>';
       }
-      return '<div class="production-block"><h3>' + p.name + '</h3>'
-        + (p.factory.length ? '<div class="pg-grid">' + gridHtml + '</div>' : gridHtml)
-        + '</div>';
+      return '<div class="production-block"><h3>' + p.name + '</h3>' + inner + '</div>';
     }).join('');
-    // click to lightbox photo
-    prodList.querySelectorAll('.pg-item').forEach(function (it) {
+    prodList.querySelectorAll('.prod-item').forEach(function (it) {
       it.addEventListener('click', function () { openLightbox(it.getAttribute('data-full'), it.querySelector('figcaption').textContent); });
     });
   }
 
-  // ---- About carousel (factory photos) ----
+  // ---- Hero background carousel (prefer user-selected images) ----
+  var heroSection = document.getElementById('top');
+  var heroImages = (window.HERO_IMAGES && window.HERO_IMAGES.length) ? window.HERO_IMAGES
+    : ['assets/images/hero/hero-main.jpg'];
+  if (heroSection && heroImages.length > 1) {
+    var hi = 0;
+    function heroShow() {
+      heroSection.style.backgroundImage = 'linear-gradient(rgba(20,24,28,0.55),rgba(20,24,28,0.45)), url("' + esc(heroImages[hi] ) + '")';
+      hi = (hi + 1) % heroImages.length;
+    }
+    setInterval(heroShow, 3500);
+  }
+
+  // ---- About carousel (prefer user-selected About image; else factory photos) ----
   var aboutImg = document.getElementById('about-carousel-img');
-  if (aboutImg && PRODUCTS.length) {
-    var faces = PRODUCTS.filter(function (p) { return p.factory.length; });
-    var pool = [];
-    faces.forEach(function (p) { p.factory.slice(0, 3).forEach(function (f) { pool.push(f); }); });
+  if (aboutImg) {
+    var pool;
+    if (window.ABOUT_IMAGES && window.ABOUT_IMAGES.length) {
+      pool = window.ABOUT_IMAGES;
+    } else {
+      var faces = PRODUCTS.filter(function (p) { return p.factory.length; });
+      pool = [];
+      faces.forEach(function (p) { p.factory.slice(0, 3).forEach(function (f) { pool.push(f); }); });
+    }
     if (pool.length) {
-      var ai = 0, capEl = document.getElementById('about-carousel-cap');
+      var capEl = document.getElementById('about-carousel-cap');
+      aboutImg.src = pool[0];
+      if (capEl) capEl.textContent = 'Production of ' + fa(pool[0]);
+      var ai = 1;
       function aboutShow() {
         aboutImg.src = pool[ai];
         if (capEl) capEl.textContent = 'Production of ' + fa(pool[ai]);
         ai = (ai + 1) % pool.length;
       }
-      setInterval(aboutShow, 3000);
+      if (pool.length > 1) setInterval(aboutShow, 3000);
     }
   }
 
