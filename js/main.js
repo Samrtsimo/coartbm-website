@@ -25,12 +25,33 @@
   }
   function closeLightbox() { if (lb) { lb.style.display = 'none'; document.body.style.overflow = ''; } }
 
+  // ---- Production mini-gallery modal (all photos of one product) ----
+  function openProductGallery(name, images) {
+    if (!images || !images.length) return;
+    var lb2 = document.getElementById('lightbox');
+    if (!lb2) return;
+    var grid = images.map(function (p) {
+      return '<figure class="pm-item" data-full="' + esc(p) + '"><img loading="lazy" src="' + esc(p) + '" alt="' + name + '"></figure>';
+    }).join('');
+    lb2.innerHTML = '<div class="lightbox-overlay"></div><div class="pm-window pg-window">'
+      + '<button class="pm-close" aria-label="Close">×</button>'
+      + '<div class="pm-head"><h3>' + name + '</h3><span>' + images.length + ' photos</span></div>'
+      + '<div class="pm-body"><div class="pm-grid">' + grid + '</div></div></div>';
+    document.body.style.overflow = 'hidden';
+    lb2.style.display = 'flex';
+    lb2.querySelector('.pm-close').addEventListener('click', closeLightbox);
+    lb2.querySelector('.lightbox-overlay').addEventListener('click', closeLightbox);
+    lb2.querySelectorAll('.pm-item').forEach(function (it) {
+      it.addEventListener('click', function () { openLightbox(it.getAttribute('data-full'), ''); });
+    });
+  }
+
   // ---- Product card: single preview image (one per category) ----
   var grid = document.getElementById('product-grid');
   if (grid && PRODUCTS.length) {
     grid.innerHTML = PRODUCTS.map(function (p) {
       var img = p.best[0] || (p.catalog[0] || '');
-      return '<button class="product-card" data-product="' + p.id + '" aria-label="View ' + p.name + '">'
+      return '<button class="product-card" id="product-' + p.id + '" data-product="' + p.id + '" aria-label="View ' + p.name + '">'
         + '<div class="thumb"><img src="' + esc(img) + '" alt="' + p.name + '"></div>'
         + '<div class="body">'
         + '<div class="cat">' + p.cat + '</div>'
@@ -113,27 +134,38 @@
     document.addEventListener('keydown', key);
   }
 
-  // ---- Production section: group by product, photos or video (horizontal rows) ----
+  // ---- Production section: small tile entry per product → expand to more ----
   var prodList = document.getElementById('production-list');
   if (prodList && PRODUCTS.length) {
     var prods = PRODUCTS.filter(function (p) { return p.factory.length || p.videos.length; });
     prodList.innerHTML = prods.map(function (p) {
-      var inner = '';
-      if (p.factory.length) {
-        inner = p.factory.slice(0, 12).map(function (f) {
-          return '<figure class="prod-item" data-full="' + esc(f) + '"><img loading="lazy" src="' + esc(f) + '" alt="' + p.name + '"><figcaption>' + fa(f) + '</figcaption></figure>';
-        }).join('');
-        inner = '<div class="prod-shelf">' + inner + '</div>';
-      } else if (p.videos.length) {
-        inner = p.videos.slice(0, 6).map(function (v) {
-          return '<div class="prod-video"><video controls preload="metadata" src="' + esc(v) + '"></video></div>';
-        }).join('');
-        inner = '<div class="prod-shelf">' + inner + '</div>';
-      }
-      return '<div class="production-block"><h3>' + p.name + '</h3>' + inner + '</div>';
+      var items = p.factory.length
+        ? p.factory.map(function (f) { return '<figure class="prod-item" data-full="' + esc(f) + '"><img loading="lazy" src="' + esc(f) + '" alt="' + p.name + '"></figure>'; })
+        : (p.videos.slice(0, 9).map(function (v) { return '<div class="prod-video"><video controls preload="metadata" src="' + esc(v) + '"></video></div>'; }));
+      var preview = items.slice(0, 3).join('');
+      var moreThumb = (items.length > 3)
+        ? '<button class="prod-more" data-more data-name="' + p.name + '" data-images="' + encodeURIComponent(JSON.stringify(p.factory || [])) + '">View all ' + (p.factory.length || p.videos.length) + ' ›</button>'
+        : '';
+      var moreVideo = (items.length > 3 && !p.factory.length)
+        ? ''
+        : '';
+      return '<div class="production-block" data-name="' + p.name + '"><h3>' + p.name + '</h3>'
+        + '<div class="prod-shelf">' + preview + '</div>'
+        + moreThumb
+        + '</div>';
     }).join('');
+    // photo click → lightbox
     prodList.querySelectorAll('.prod-item').forEach(function (it) {
-      it.addEventListener('click', function () { openLightbox(it.getAttribute('data-full'), it.querySelector('figcaption').textContent); });
+      it.addEventListener('click', function () { openLightbox(it.getAttribute('data-full'), ''); });
+    });
+    // video click → just play (native controls)
+    // expand tile → open a mini gallery modal with all production photos
+    prodList.querySelectorAll('.prod-more').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var name = btn.getAttribute('data-name');
+        var imgs = JSON.parse(decodeURIComponent(btn.getAttribute('data-images')));
+        openProductGallery(name, imgs);
+      });
     });
   }
 
@@ -164,11 +196,11 @@
     if (pool.length) {
       var capEl = document.getElementById('about-carousel-cap');
       aboutImg.src = pool[0];
-      if (capEl) capEl.textContent = 'Production of ' + fa(pool[0]);
+      if (capEl) capEl.textContent = '';
       var ai = 1;
       function aboutShow() {
         aboutImg.src = pool[ai];
-        if (capEl) capEl.textContent = 'Production of ' + fa(pool[ai]);
+        if (capEl) capEl.textContent = '';
         ai = (ai + 1) % pool.length;
       }
       if (pool.length > 1) setInterval(aboutShow, 3000);
