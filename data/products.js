@@ -1,11 +1,16 @@
-// Product image gallery data — auto-generated
+// Product gallery data — auto-generated
 window.PRODUCTS = [
   {
     "id": "metal-door",
     "name": "Metal Security Entrance Door",
     "cat": "Doors",
-    "count": 62,
-    "images": [
+    "desc": "Armored carved steel entrance doors in multiple series, finishes and security levels — residential & villa applications.",
+    "best": [
+      "assets/images/products/metal-door/catalog/11.jpg",
+      "assets/images/products/metal-door/catalog/12.jpg",
+      "assets/images/products/metal-door/catalog/catalogue 3_页面_01.jpg"
+    ],
+    "catalog": [
       "assets/images/products/metal-door/catalog/11.jpg",
       "assets/images/products/metal-door/catalog/12.jpg",
       "assets/images/products/metal-door/catalog/catalogue 3_页面_01.jpg",
@@ -68,14 +73,53 @@ window.PRODUCTS = [
       "assets/images/products/metal-door/catalog/p11-12.jpg",
       "assets/images/products/metal-door/catalog/p13-14.jpg",
       "assets/images/products/metal-door/catalog/page 15-16.jpg"
-    ]
+    ],
+    "factory": [
+      "assets/images/products/metal-door/factory/2.jpg",
+      "assets/images/products/metal-door/factory/4 (2).JPG",
+      "assets/images/products/metal-door/factory/4.jpg",
+      "assets/images/products/metal-door/factory/5.jpg",
+      "assets/images/products/metal-door/factory/6.jpg",
+      "assets/images/products/metal-door/factory/IMG_7446.JPG",
+      "assets/images/products/metal-door/factory/IMG_7798.JPG",
+      "assets/images/products/metal-door/factory/IMG_7800.JPG",
+      "assets/images/products/metal-door/factory/container loading.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202112010915079.jpg",
+      "assets/images/products/metal-door/factory/微信图片_2021120109161513.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202112010916159.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202206161643009.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20220616165230.jpg",
+      "assets/images/products/metal-door/factory/微信图片_2022070321351329.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202207032135135.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202301102229425.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202301102239334.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202301102239335.jpg",
+      "assets/images/products/metal-door/factory/微信图片_202408210634333.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20250412164816.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20250412164823.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20260123160022_966_237.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20260123160025_967_237.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20260123160241_1018_237.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20260123160256_1027_237.jpg",
+      "assets/images/products/metal-door/factory/微信图片_20260123160302_1030_237.jpg",
+      "assets/images/products/metal-door/factory/推荐的两款7公分门-每排装14个，立体门框 (2).jpg"
+    ],
+    "videos": [],
+    "count": 62,
+    "factoryCount": 28,
+    "videoCount": 0
   },
   {
     "id": "interior-door",
     "name": "Interior WPC & Wood Door",
     "cat": "Doors",
-    "count": 10,
-    "images": [
+    "desc": "Interior doors in WPC and wood construction with a wide range of finishes and colour swatches.",
+    "best": [
+      "assets/images/products/interior-door/catalog/wood_p03.jpg",
+      "assets/images/products/interior-door/catalog/wood_p04.jpg",
+      "assets/images/products/interior-door/catalog/wood_p05.jpg"
+    ],
+    "catalog": [
       "assets/images/products/interior-door/catalog/wood_p03.jpg",
       "assets/images/products/interior-door/catalog/wood_p04.jpg",
       "assets/images/products/interior-door/catalog/wood_p05.jpg",
@@ -86,14 +130,35 @@ window.PRODUCTS = [
       "assets/images/products/interior-door/catalog/wood_p10.jpg",
       "assets/images/products/interior-door/catalog/wood_p11.jpg",
       "assets/images/products/interior-door/catalog/wood_p12.jpg"
-    ]
+    ],
+    "factory": [
+      "assets/images/products/interior-door/factory/IMG_6649.JPG",
+      "assets/images/products/interior-door/factory/IMG_8807.JPG",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515911.jpg",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515912.jpg",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515913.jpg",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515914.jpg",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515915.jpg",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515916.jpg",
+      "assets/images/products/interior-door/factory/微信图片_2021112310515917.jpg",
+      "assets/images/products/interior-door/factory/装柜照片7.JPG"
+    ],
+    "videos": [],
+    "count": 10,
+    "factoryCount": 10,
+    "videoCount": 0
   },
   {
     "id": "aluminum",
     "name": "Aluminum Door & Window",
     "cat": "Doors & Windows",
-    "count": 61,
-    "images": [
+    "desc": "Thermal-break sliding & casement windows, lift-and-slide doors and sunrooms — high performance glazing systems.",
+    "best": [
+      "assets/images/products/aluminum/catalog/alu_p02.jpg",
+      "assets/images/products/aluminum/catalog/alu_p03.jpg",
+      "assets/images/products/aluminum/catalog/alu_p04.jpg"
+    ],
+    "catalog": [
       "assets/images/products/aluminum/catalog/alu_p02.jpg",
       "assets/images/products/aluminum/catalog/alu_p03.jpg",
       "assets/images/products/aluminum/catalog/alu_p04.jpg",
@@ -155,28 +220,54 @@ window.PRODUCTS = [
       "assets/images/products/aluminum/catalog/alu_p60.jpg",
       "assets/images/products/aluminum/catalog/alu_p61.jpg",
       "assets/images/products/aluminum/catalog/alu_p62.jpg"
-    ]
+    ],
+    "factory": [],
+    "videos": [
+      "assets/videos/aluminum/production_1.mp4"
+    ],
+    "count": 61,
+    "factoryCount": 0,
+    "videoCount": 1
   },
   {
     "id": "steel-window",
     "name": "Steel Window",
     "cat": "Windows",
-    "count": 6,
-    "images": [
+    "desc": "Architectural steel windows & steel door systems for modern, industrial and colonial style buildings.",
+    "best": [
+      "assets/images/products/steel-window/catalog/steel_p02.jpg",
+      "assets/images/products/steel-window/catalog/steel_p03.jpg",
+      "assets/images/products/steel-window/catalog/steel_p04.jpg"
+    ],
+    "catalog": [
       "assets/images/products/steel-window/catalog/steel_p02.jpg",
       "assets/images/products/steel-window/catalog/steel_p03.jpg",
       "assets/images/products/steel-window/catalog/steel_p04.jpg",
       "assets/images/products/steel-window/catalog/steel_p05.jpg",
       "assets/images/products/steel-window/catalog/steel_p06.jpg",
       "assets/images/products/steel-window/catalog/steel_p07.jpg"
-    ]
+    ],
+    "factory": [
+      "assets/images/products/steel-window/factory/10.jpg",
+      "assets/images/products/steel-window/factory/IMG_7106.JPG",
+      "assets/images/products/steel-window/factory/IMG_7110.JPG"
+    ],
+    "videos": [],
+    "count": 6,
+    "factoryCount": 3,
+    "videoCount": 0
   },
   {
     "id": "spc",
     "name": "SPC Flooring",
     "cat": "Flooring",
-    "count": 100,
-    "images": [
+    "desc": "Rigid-core SPC luxury vinyl flooring with realistic wood & stone textures — waterproof and durable.",
+    "best": [
+      "assets/images/products/spc/catalog/spc_p001.jpg",
+      "assets/images/products/spc/catalog/spc_p002.jpg",
+      "assets/images/products/spc/catalog/spc_p003.jpg"
+    ],
+    "catalog": [
       "assets/images/products/spc/catalog/spc_p001.jpg",
       "assets/images/products/spc/catalog/spc_p002.jpg",
       "assets/images/products/spc/catalog/spc_p003.jpg",
@@ -277,14 +368,27 @@ window.PRODUCTS = [
       "assets/images/products/spc/catalog/spc_p098.jpg",
       "assets/images/products/spc/catalog/spc_p099.jpg",
       "assets/images/products/spc/catalog/spc_p_100.jpg"
-    ]
+    ],
+    "factory": [],
+    "videos": [
+      "assets/videos/spc/production_1.mp4",
+      "assets/videos/spc/production_2.mp4"
+    ],
+    "count": 100,
+    "factoryCount": 0,
+    "videoCount": 2
   },
   {
     "id": "pu-trim",
     "name": "PU Skirting & Crown Moulding",
-    "cat": "Decor",
-    "count": 242,
-    "images": [
+    "cat": "Decorative Profile",
+    "desc": "Polyurethane decorative building materials — skirting boards, crown mouldings, panels and ceiling profiles.",
+    "best": [
+      "assets/images/products/pu-trim/catalog/pu_001.jpg",
+      "assets/images/products/pu-trim/catalog/pu_002.jpg",
+      "assets/images/products/pu-trim/catalog/pu_003.jpg"
+    ],
+    "catalog": [
       "assets/images/products/pu-trim/catalog/pu_001.jpg",
       "assets/images/products/pu-trim/catalog/pu_002.jpg",
       "assets/images/products/pu-trim/catalog/pu_003.jpg",
@@ -527,14 +631,32 @@ window.PRODUCTS = [
       "assets/images/products/pu-trim/catalog/pu_240.jpg",
       "assets/images/products/pu-trim/catalog/pu_241.jpg",
       "assets/images/products/pu-trim/catalog/pu_242.jpg"
-    ]
+    ],
+    "factory": [],
+    "videos": [
+      "assets/videos/pu/curving shape making 1.mp4",
+      "assets/videos/pu/curving shape making 2.mp4",
+      "assets/videos/pu/decor items.mp4",
+      "assets/videos/pu/injection&forming process 1.mp4",
+      "assets/videos/pu/injection&forming process 2.mp4",
+      "assets/videos/pu/packing process 1.mp4",
+      "assets/videos/pu/packing process 2.mp4"
+    ],
+    "count": 242,
+    "factoryCount": 0,
+    "videoCount": 7
   },
   {
     "id": "pu-stone",
     "name": "PU Stone Panel",
-    "cat": "Decor",
-    "count": 17,
-    "images": [
+    "cat": "Wall Panel",
+    "desc": "Lightweight PU faux-stone wall panels for interior & exterior feature walls — rich texture, easy install.",
+    "best": [
+      "assets/images/products/pu-stone/catalog/stone_p001.jpg",
+      "assets/images/products/pu-stone/catalog/stone_p002.jpg",
+      "assets/images/products/pu-stone/catalog/stone_p003.jpg"
+    ],
+    "catalog": [
       "assets/images/products/pu-stone/catalog/stone_p001.jpg",
       "assets/images/products/pu-stone/catalog/stone_p002.jpg",
       "assets/images/products/pu-stone/catalog/stone_p003.jpg",
@@ -552,6 +674,11 @@ window.PRODUCTS = [
       "assets/images/products/pu-stone/catalog/stone_p015.jpg",
       "assets/images/products/pu-stone/catalog/stone_p016.jpg",
       "assets/images/products/pu-stone/catalog/stone_p017.jpg"
-    ]
+    ],
+    "factory": [],
+    "videos": [],
+    "count": 17,
+    "factoryCount": 0,
+    "videoCount": 0
   }
 ];

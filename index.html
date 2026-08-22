@@ -30,7 +30,7 @@
 <!-- ========== Hero ========== -->
 <section id="top" class="hero" style="background-image:linear-gradient(rgba(30,34,39,0.64),rgba(30,34,39,0.52)), url('assets/images/hero/hero-door.jpg');background-size:cover;background-position:center">
   <div class="hero-inner">
-    <div class="hero-badge">🏗️ Building materials · Ningbo, China</div>
+    <div class="hero-badge">🏗️ Your professional purchase assistant of building material in China</div>
     <h1>Your trusted<br><span style="color:#c9ced3">building materials</span> partner</h1>
     <p><strong style="color:rgba(255,255,255,0.95)">20+ years</strong> exporting architectural building materials.<br>
     Doors, windows, flooring &amp; decor — from factory to your site.</p>
@@ -77,8 +77,10 @@
         </ul>
       </div>
       <div>
-        <img src="assets/images/products/metal-door/factory/2.jpg" alt="Coart factory production" style="border-radius:var(--radius-lg);box-shadow:var(--shadow-lg)">
-        <p style="font-size:0.82rem;color:var(--muted);margin-top:10px">Production line — security door manufacturing.</p>
+        <div id="about-carousel" class="about-carousel" style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)">
+          <img id="about-carousel-img" src="assets/images/products/metal-door/factory/2.jpg" alt="Coart factory production">
+        </div>
+        <p id="about-carousel-cap" style="font-size:0.82rem;color:var(--muted);margin-top:10px">Production line — factory floor.</p>
       </div>
     </div>
   </div>
@@ -91,123 +93,18 @@
     <h2 class="section-title">One-stop building material range</h2>
     <p class="section-lead">A curated range across doors, windows, flooring and decorative profiles — each category available in multiple models and finishes.</p>
 
-    <div class="product-grid">
-
-      <!-- Metal security door -->
-      <div class="product-card" id="product-metal-door">
-        <div class="thumb"><img src="assets/images/products/metal-door/catalog/mdoor_003.jpg" alt="Metal security entrance door"></div>
-        <div class="body">
-          <div class="cat">Doors</div>
-          <h3>Metal Security Entrance Door</h3>
-          <p>Armored carved steel entrance doors in multiple series, finishes and security levels — residential &amp; villa applications.</p>
-          <div class="foot">
-            <span class="models">Multiple models &amp; finishes</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Interior WPC / wood door -->
-      <div class="product-card" id="product-interior-door">
-        <div class="thumb"><img src="assets/images/products/interior-door/catalog/wood_p03.jpg" alt="Interior WPC and wood door"></div>
-        <div class="body">
-          <div class="cat">Doors</div>
-          <h3>Interior WPC &amp; Wood Door</h3>
-          <p>Interior doors in WPC and wood construction, wide range of finishes and colour swatches to match your interior design.</p>
-          <div class="foot">
-            <span class="models">WPC / wood · many finishes</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Aluminum door & window -->
-      <div class="product-card" id="product-aluminum">
-        <div class="thumb"><img src="assets/images/products/aluminum/catalog/alu_p02.jpg" alt="Aluminum door and window"></div>
-        <div class="body">
-          <div class="cat">Windows &amp; Doors</div>
-          <h3>Aluminum Door &amp; Window</h3>
-          <p>Thermal-break sliding &amp; casement windows, lift-and-slide doors and sunrooms — high performance glazing systems.</p>
-          <div class="foot">
-            <span class="models">Thermal break · versatile</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Steel window -->
-      <div class="product-card" id="product-steel-window">
-        <div class="thumb"><img src="assets/images/products/steel-window/catalog/steel_p05.jpg" alt="Steel window"></div>
-        <div class="body">
-          <div class="cat">Windows</div>
-          <h3>Steel Window</h3>
-          <p>Architectural steel windows &amp; steel door systems for modern, industrial and colonial style buildings.</p>
-          <div class="foot">
-            <span class="models">Architectural profiles</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SPC flooring -->
-      <div class="product-card" id="product-spc">
-        <div class="thumb"><img src="assets/images/products/spc/catalog/spc_p002.jpg" alt="SPC flooring"></div>
-        <div class="body">
-          <div class="cat">Flooring</div>
-          <h3>SPC Flooring</h3>
-          <p>Rigid-core SPC luxury vinyl flooring with realistic wood &amp; stone textures — waterproof, durable, for commercial &amp; residential.</p>
-          <div class="foot">
-            <span class="models">Waterproof · many styles</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- PU skirting & crown moulding -->
-      <div class="product-card" id="product-pu-trim">
-        <div class="thumb"><img src="assets/images/products/pu-trim/catalog/pu_012.jpg" alt="PU skirting and crown moulding"></div>
-        <div class="body">
-          <div class="cat">Decorative Profile</div>
-          <h3>PU Skirting &amp; Crown Moulding</h3>
-          <p>Polyurethane decorative building materials — skirting boards, crown mouldings, panels and ceiling profiles.</p>
-          <div class="foot">
-            <span class="models">Wide range of profiles</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- PU stone panel -->
-      <div class="product-card" id="product-pu-stone">
-        <div class="thumb"><img src="assets/images/products/pu-stone/catalog/stone_p003.jpg" alt="PU stone panel"></div>
-        <div class="body">
-          <div class="cat">Wall Panel</div>
-          <h3>PU Stone Panel</h3>
-          <p>Lightweight PU faux-stone wall panels for interior &amp; exterior feature walls — rich texture, easy install.</p>
-          <div class="foot">
-            <span class="models">Multiple stone textures</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="product-grid" id="product-grid"><!-- rendered by JS from data/products.js --></div>
   </div>
 </section>
 
-<!-- ========== Production reality (factory photos/video) ========== -->
+<!-- ========== Production & Quality (by product) ========== -->
 <section id="production" class="section">
   <div class="section-inner">
     <div class="section-label">Production &amp; Quality</div>
     <h2 class="section-title">See the real production</h2>
     <p class="section-lead">Real photos and videos from our partner factories — the authenticity behind every shipment.</p>
 
-    <div class="gallery-grid">
-      <figure><img src="assets/images/products/metal-door/factory/4.jpg" alt="Door production"><figcaption>Security door production</figcaption></figure>
-      <figure><img src="assets/images/products/metal-door/factory/5.jpg" alt="Door loading"><figcaption>Container loading</figcaption></figure>
-      <figure><img src="assets/images/products/steel-window/factory/IMG_7106.JPG" alt="Steel window workshop"><figcaption>Steel window workshop</figcaption></figure>
-      <figure><img src="assets/images/products/interior-door/factory/微信图片_2021112310515911.jpg" alt="Interior door finish"><figcaption>Interior door finishing</figcaption></figure>
-    </div>
+    <div id="production-list" class="production-list"><!-- rendered by JS from data/products.js --></div>
   </div>
 </section>
 
@@ -262,8 +159,11 @@
       <div class="catalogue-card">
         <div class="cat-icon">🚪</div>
         <h3>Metal Security Doors</h3>
-        <div class="size">PDF · full catalogue</div>
-        <a class="dl" href="assets/catalogues/metal_door_catalogue_1.pdf" download>⬇ Download PDF</a>
+        <div class="size">4 PDF catalogues</div>
+        <a class="dl" href="assets/catalogues/metal_door_catalogue_1.pdf" download>⬇ Catalogue 1</a>
+        <a class="dl" href="assets/catalogues/metal_door_catalogue_2.pdf" download>⬇ Catalogue 2</a>
+        <a class="dl" href="assets/catalogues/metal_door_catalogue_3.pdf" download>⬇ Catalogue 3</a>
+        <a class="dl" href="assets/catalogues/metal_door_catalogue_4.pdf" download>⬇ Catalogue 4</a>
       </div>
       <div class="catalogue-card">
         <div class="cat-icon">🚪</div>
