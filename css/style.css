@@ -7,16 +7,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink: #1c1f23;          /* near-black text */
-  --slate: #2e3237;        /* header / headings */
-  --steel: #5b7a94;        /* accent / links  (aluminium blue-grey) */
-  --steel-dark: #48617a;
+  --ink: #16181b;          /* near-black text */
+  --slate: #1f2226;        /* header / headings — deep charcoal */
+  --steel: #4a6884;        /* accent / links  (aluminium blue-grey) */
+  --steel-dark: #3a536b;
   --alum: #9aa0a6;         /* aluminium silver */
   --alum-light: #c9ced3;
   --bg: #ffffff;           /* white background */
-  --bg-alt: #f4f5f6;       /* light grey section */
-  --line: #e3e6e9;         /* border lines */
-  --muted: #6b7075;        /* secondary text */
+  --bg-alt: #f5f6f7;       /* light grey section */
+  --line: #e2e5e8;         /* border lines */
+  --muted: #5f656b;        /* secondary text */
   --white: #ffffff;
 
   --radius: 6px;
