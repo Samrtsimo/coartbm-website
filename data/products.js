@@ -223,7 +223,7 @@ window.PRODUCTS = [
     ],
     "factory": [],
     "videos": [
-      "assets/videos/aluminum/production_1.mp4"
+      "assets/videos/aluminum/production_2.mp4"
     ],
     "count": 61,
     "factoryCount": 0,
