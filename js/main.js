@@ -16,13 +16,17 @@
   // ---- Full-screen lightbox (single image) ----
   var lb = document.getElementById('lightbox');
   // ---- Lightbox that supports an image set with prev/next ----
+  // Open with an explicit RAW (un-encoded) path + a sibling set of RAW paths.
   var _lbIdx = 0, _lbSet = [];
-  function openLightbox(src, caption) {
-    // Determine the image set + index. If src has neighbours in a known gallery,
-    // build around it, else treat as single image.
-    var hasSet = _lbSet.indexOf(src) !== -1;
-    _lbIdx = hasSet ? _lbSet.indexOf(src) : 0;
-    if (!hasSet) _lbSet = [src];
+  function openLightbox(src, caption, setArr) {
+    if (setArr && setArr.length) {
+      _lbSet = setArr.slice();
+      var i = _lbSet.indexOf(src);
+      _lbIdx = i !== -1 ? i : 0;
+    } else {
+      _lbSet = [src];
+      _lbIdx = 0;
+    }
     renderLb(caption);
   }
   function renderLb(caption) {
@@ -34,7 +38,7 @@
       : '';
     lb.innerHTML = '<div class="lightbox-overlay"></div><div class="lightbox-body">'
       + '<img src="' + esc(src) + '" alt="">'
-      + (caption || _lbIdx >= 0 ? '<p>' + (_lbIdx+1) + ' / ' + _lbSet.length + '</p>' : '<p></p>')
+      + '<p>' + (_lbIdx + 1) + ' / ' + _lbSet.length + '</p>'
       + nav
       + '<button class="lightbox-close" aria-label="Close">×</button></div>';
     document.body.style.overflow = 'hidden';
@@ -48,7 +52,6 @@
         renderLb(caption);
       });
     });
-    // keyboard arrows
     var key = function (e) {
       if (e.key === 'ArrowRight') { _lbIdx = (_lbIdx + 1) % _lbSet.length; renderLb(caption); }
       else if (e.key === 'ArrowLeft') { _lbIdx = (_lbIdx - 1 + _lbSet.length) % _lbSet.length; renderLb(caption); }
@@ -64,8 +67,8 @@
     if (!images || !images.length) return;
     var lb2 = document.getElementById('lightbox');
     if (!lb2) return;
-    var grid = images.map(function (p) {
-      return '<figure class="pm-item" data-full="' + esc(p) + '"><img loading="lazy" src="' + esc(p) + '" alt="' + name + '"></figure>';
+    var grid = images.map(function (p, idx) {
+      return '<figure class="pm-item" data-idx="' + idx + '"><img loading="lazy" src="' + esc(p) + '" alt="' + name + '"></figure>';
     }).join('');
     lb2.innerHTML = '<div class="lightbox-overlay"></div><div class="pm-window pg-window">'
       + '<button class="pm-close" aria-label="Close">×</button>'
@@ -76,7 +79,10 @@
     lb2.querySelector('.pm-close').addEventListener('click', closeLightbox);
     lb2.querySelector('.lightbox-overlay').addEventListener('click', closeLightbox);
     lb2.querySelectorAll('.pm-item').forEach(function (it) {
-      it.addEventListener('click', function () { _lbSet = images; openLightbox(it.getAttribute('data-full'), ''); });
+      it.addEventListener('click', function () {
+        var i = parseInt(it.getAttribute('data-idx'), 10);
+        openLightbox(images[isNaN(i) ? 0 : i], '', images);
+      });
     });
   }
 
@@ -107,8 +113,8 @@
   // ---- Product modal (full gallery + factory + video, maximizable) ----
   function imgGrid(paths, name) {
     if (!paths.length) return '';
-    return '<div class="pm-grid">' + paths.map(function (p) {
-      return '<figure class="pm-item" data-full="' + esc(p) + '"><img loading="lazy" src="' + esc(p) + '" alt="' + name + '"><figcaption>' + fa(p) + '</figcaption></figure>';
+    return '<div class="pm-grid">' + paths.map(function (p, idx) {
+      return '<figure class="pm-item" data-idx="' + idx + '"><img loading="lazy" src="' + esc(p) + '" alt="' + name + '"><figcaption>' + fa(p) + '</figcaption></figure>';
     }).join('') + '</div>';
   }
   function openProductModal(p) {
@@ -156,10 +162,16 @@
       });
     });
 
-    // Click grid image -> maximize
+    // Click grid image -> maximize (respect current tab's image set)
     overlay.querySelectorAll('.pm-item').forEach(function (it) {
       it.addEventListener('click', function () {
-        openLightbox(it.getAttribute('data-full'), it.querySelector('figcaption').textContent);
+        var tab = overlay.querySelector('.pm-tabs button.active');
+        var tabName = tab ? tab.getAttribute('data-tab') : 'catalog';
+        var setArr = (tabName === 'factory' && p.factory.length) ? p.factory
+          : (tabName === 'video' ? p.videos : p.catalog);
+        var i = parseInt(it.getAttribute('data-idx'), 10);
+        if (setArr.length) { openLightbox(setArr[isNaN(i) ? 0 : i], '', setArr); }
+        else { openLightbox(it.querySelector('img').getAttribute('src'), ''); }
       });
     });
 
@@ -175,8 +187,8 @@
     prodList.innerHTML = prods.map(function (p) {
       if (p.factory.length) {
         // PHOTO product: 3 preview tiles + View all → gallery modal with nav
-        var preview = p.factory.slice(0, 3).map(function (f) {
-          return '<figure class="prod-item" data-full="' + esc(f) + '"><img loading="lazy" src="' + esc(f) + '" alt="' + p.name + '"></figure>';
+        var preview = p.factory.slice(0, 3).map(function (f, idx) {
+          return '<figure class="prod-item" data-idx="' + idx + '"><img loading="lazy" src="' + esc(f) + '" alt="' + p.name + '"></figure>';
         }).join('');
         var more = (p.factory.length > 3)
           ? '<button class="prod-more" data-photos="' + encodeURIComponent(JSON.stringify(p.factory)) + '">View all ' + p.factory.length + ' ›</button>'
@@ -200,9 +212,12 @@
     // photo click → lightbox browsing the whole factory set (prev/next)
     prodList.querySelectorAll('.prod-item').forEach(function (it) {
       var block = it.closest('.production-block');
-      var set = block ? PRODUCTS.find(function (x) { return x.name === (block.querySelector('h3') ? block.querySelector('h3').textContent : ''); }) : null;
-      var setArr = (set && set.factory) ? set.factory : [it.getAttribute('data-full')];
-      it.addEventListener('click', function () { _lbSet = setArr; _lbIdx = setArr.indexOf(it.getAttribute('data-full')); openLightbox(it.getAttribute('data-full'), ''); });
+      var product = block ? PRODUCTS.find(function (x) { return x.name === (block.querySelector('h3') ? block.querySelector('h3').textContent : ''); }) : null;
+      var setArr = (product && product.factory) ? product.factory : [];
+      it.addEventListener('click', function () {
+        if (setArr.length) { var i = parseInt(it.getAttribute('data-idx'), 10); openLightbox(setArr[isNaN(i) ? 0 : i], '', setArr); }
+        else { openLightbox(it.querySelector('img').getAttribute('src'), ''); }
+      });
     });
 
     // photo "View all" → gallery modal (images)
