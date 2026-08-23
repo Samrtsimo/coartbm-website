@@ -293,32 +293,38 @@ img { max-width: 100%; display: block; }
 /* Lightbox prev/next navigation */
 .lightbox-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px; border-radius: 50%; border: none;
-  background: rgba(255,255,255,0.15); color: white; font-size: 2rem;
-  cursor: pointer; line-height: 1; transition: background 0.2s;
+  width: 64px; height: 64px; border-radius: 50%; border: none;
+  background: rgba(20,24,28,0.55); color: white; font-size: 2.4rem;
+  cursor: pointer; line-height: 1; transition: background 0.2s; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
-.lightbox-nav:hover { background: rgba(255,255,255,0.32); }
-.lightbox-nav.prev { left: -64px; }
-.lightbox-nav.next { right: -64px; }
-@media (max-width: 900px) { .lightbox-nav.prev { left: 8px; } .lightbox-nav.next { right: 8px; } }
+.lightbox-nav:hover { background: rgba(20,24,28,0.78); }
+.lightbox-nav.prev { left: 22px; }
+.lightbox-nav.next { right: 22px; }
 
-/* Generic carousel prev/next buttons */
+/* Generic carousel prev/next buttons — large, on both ends */
 .car-nav {
   position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
-  width: 42px; height: 42px; border-radius: 50%; border: none;
-  background: rgba(0,0,0,0.35); color: white; font-size: 1.8rem;
+  width: 64px; height: 64px; border-radius: 50%; border: none;
+  background: rgba(20,24,28,0.5); color: white; font-size: 2.4rem;
   cursor: pointer; line-height: 1; transition: background 0.2s; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.28);
 }
-.car-nav:hover { background: rgba(0,0,0,0.55); }
-.car-nav.prev { left: 14px; }
-.car-nav.next { right: 14px; }
+.car-nav:hover { background: rgba(20,24,28,0.75); }
+.car-nav.prev { left: 18px; }
+.car-nav.next { right: 18px; }
 /* About carousel buttons */
 .about-carousel { position: relative; }
 .about-carousel .car-nav { top: 50%; }
-/* Hero nav buttons — fixed to viewport sides */
+/* Hero nav buttons — fixed to viewport sides, both ends */
 .hero .hero-nav { position: absolute; top: 50%; transform: translateY(-50%); }
-.hero .hero-nav.prev { left: 20px; }
-.hero .hero-nav.next { right: 20px; }
+.hero .hero-nav.prev { left: 26px; }
+.hero .hero-nav.next { right: 26px; }
+@media (max-width: 720px) {
+  .car-nav, .lightbox-nav { width: 48px; height: 48px; font-size: 1.8rem; }
+  .car-nav.prev, .lightbox-nav.prev { left: 10px; }
+  .car-nav.next, .lightbox-nav.next { right: 10px; }
+}
 /* expanded video shelf */
 .prod-more-shelf { margin-top: 14px; max-width: none; grid-template-columns: repeat(3, 1fr); }
 
